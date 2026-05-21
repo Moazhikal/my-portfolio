@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمالي | السيرة الذاتية</title>
+    <title>معرض أعمالي | السيرة الذاتية التفاعلية</title>
     <style>
         :root {
             --primary: #1e293b;
@@ -27,6 +27,7 @@
             color: var(--text-main);
             line-height: 1.6;
             padding: 40px 20px;
+            overflow-x: hidden; /* لمنع حدوث شريط تمرير أفقي أثناء الحركة */
         }
 
         .container {
@@ -77,9 +78,22 @@
             color: var(--accent);
         }
 
-        /* Section Generic Style */
+        /* ── ✨ كود الترانزاكشن والحركة الجديد ✨ ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px); /* يبدأ القسم نازلاً لأسفل بمقدار 50 بكسل */
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* حركة سلسة جداً واحترافية */
+        }
+
+        /* الفئة التي سيضيفها الجافاسكريبت تلقائياً عند النزول */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ─────────────────────────────────────── */
+
         section {
-            margin-bottom: 35px;
+            margin-bottom: 45px;
         }
 
         h2 {
@@ -91,10 +105,6 @@
         }
 
         /* Skills Layout */
-        .skills-grid {
-            display: block;
-        }
-
         .skills-category {
             margin-bottom: 15px;
             padding: 12px;
@@ -181,6 +191,7 @@
 <body>
 
     <div class="container">
+        <!-- الرأس يظهر مباشرة بدون اختفاء لتوفير تجربة مستخدم سريعة -->
         <header>
             <h1>ضع اسمك هنا</h1>
             <p>Frontend Developer | Full-Stack Web Developer</p>
@@ -191,14 +202,16 @@
             </div>
         </header>
 
-        <section>
+        <!-- القسم الأول: الملخص المهني (أضفنا كلاس reveal) -->
+        <section class="reveal">
             <h2>🎯 الملخص المهني (Summary)</h2>
             <p style="color: var(--text-muted);">
                 مطور واجهات ومواقع ويب (Frontend Developer) خريج طموح، أمتلك شغفاً كبيراً ببناء واجهات مستخدم حديثة، سريعة وتفاعلية. لدي خلفية قوية في بناء تطبيقات الويب الكاملة والأنظمة البرمجية بالاعتماد على كود نظيف وتصميم متجاوب يضمن أفضل تجربة للمستخدم عبر المتصفحات ومختلف الشاشات.
             </p>
         </section>
 
-        <section>
+        <!-- القسم الثاني: المهارات (أضفنا كلاس reveal) -->
+        <section class="reveal">
             <h2>🛠️ المهارات التقنية (Technical Skills)</h2>
             <div class="skills-grid">
                 <div class="skills-category">
@@ -220,9 +233,11 @@
             </div>
         </section>
 
-        <section>
+        <!-- القسم الثالث: المشاريع (أضفنا كلاس reveal) -->
+        <section class="reveal">
             <h2>🚀 المشاريع البرمجية (Featured Projects)</h2>
             
+            <!-- مشروع العيادات الطبية -->
             <div class="card clearfix">
                 <div class="card-header">
                     <span class="card-title">نظام إدارة العيادات الطبية والوصفات الإلكترونية</span>
@@ -241,6 +256,7 @@
                 </div>
             </div>
 
+            <!-- مشروع MERN Stack -->
             <div class="card clearfix">
                 <div class="card-header">
                     <span class="card-title">منصة التفاعل الفوري بين الفنانين والمعجبين (MERN Stack)</span>
@@ -261,7 +277,8 @@
             </div>
         </section>
 
-        <section>
+        <!-- القسم الرابع: التعليم (أضفنا كلاس reveal) -->
+        <section class="reveal">
             <h2>🎓 التعليم (Education)</h2>
             <div class="card clearfix">
                 <div class="card-header">
@@ -273,5 +290,31 @@
         </section>
     </div>
 
+    <!-- ── 🧠 كود الـ JavaScript الذكي للحركة ── -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll(".reveal");
+
+            const options = {
+                root: null, // يعتمد على نافذة المتصفح الحالية
+                threshold: 0.15, // يظهر القسم عندما يدخل منه 15% إلى الشاشة
+                rootMargin: "0px 0px -50px 0px" // تشغيل الحركة قبل ظهور القسم بقليل ليعطي انطباعاً استباقياً
+            };
+
+            const observer = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        // بمجرد أن يظهر القسم، نتوقف عن مراقبته ليبقى ظاهراً ولا يختفي مرة أخرى عند الصعود
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
