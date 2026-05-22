@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض أعمالي | السيرة الذاتية التفاعلية</title>
+    <title>My Portfolio | Interactive CV</title>
     <style>
         :root {
             --primary: #0f172a;
@@ -29,24 +29,24 @@
             position: relative;
         }
 
-        /* ── 🕸️ كود خلفية شبكة الخطوط المتفاعلة ── */
+        /* 🕸️ Interactive Particle Network Background */
         #canvas-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* تجعل الشبكة خلف المحتوى دائماً */
+            z-index: -1;
             background-color: #f8fafc;
-            pointer-events: none; /* تضمن أن الماوس يتفاعل مع الروابط بشكل طبيعي */
+            pointer-events: none;
         }
 
-        /* جعل الحاوية الرئيسية تبدو كتصميم زجاجي (Glassmorphism) لتندمج مع الخلفية */
+        /* Glassmorphism Container */
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px); /* تأثير ضبابي شفاف على الخلفية */
+            backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             padding: 40px;
             border-radius: 24px;
@@ -89,7 +89,7 @@
             color: var(--accent);
         }
 
-        /* ── ✨ تأثير الظهور التدريجي للأقسام عند النزول ✨ ── */
+        /* ✨ Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -108,12 +108,12 @@
         h2 {
             font-size: 1.4rem;
             color: var(--primary);
-            border-right: 4px solid var(--accent);
-            padding-right: 10px;
+            border-left: 4px solid var(--accent); /* تم قلب الخط إلى اليسار ليناسب الإنجليزية */
+            padding-left: 10px;
             margin-bottom: 20px;
         }
 
-        /* المهارات والتصميم المتجاوب */
+        /* Skills Layout */
         .skills-category {
             margin-bottom: 15px;
             padding: 12px;
@@ -132,7 +132,7 @@
             color: var(--text-muted);
         }
 
-        /* الكروت والمشاريع */
+        /* Project Cards */
         .card {
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid var(--border);
@@ -153,7 +153,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
-            flex-wrap: wrap; /* يجعلها متجاوبة على الشاشات الصغيرة */
+            flex-wrap: wrap;
             gap: 10px;
         }
 
@@ -180,12 +180,12 @@
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 500;
-            margin-left: 5px;
+            margin-right: 5px; /* تم تعديل الهوامش للغة الإنجليزية */
             margin-bottom: 5px;
         }
 
         ul {
-            padding-right: 20px;
+            padding-left: 20px; /* تم تعديل القوائم لتنقط من اليسار */
             color: var(--text-muted);
         }
 
@@ -193,7 +193,7 @@
             margin-bottom: 6px;
         }
 
-        /* 📱 شاشات الهواتف الذكية (Responsiveness) */
+        /* 📱 Responsive Design */
         @media (max-width: 600px) {
             body { padding: 15px 10px; }
             .container { padding: 20px 15px; border-radius: 16px; }
@@ -205,12 +205,13 @@
 </head>
 <body>
 
-    <!-- لوحة الرسم التي ستتحرك عليها الشبكة الخلفية -->
+    <!-- Interactive Background Canvas -->
     <canvas id="canvas-bg"></canvas>
 
     <div class="container">
+        <!-- Header / Personal Details -->
         <header>
-            <h1>ضع اسمك هنا</h1>
+            <h1>Your Full Name</h1>
             <p>Frontend Developer | Full-Stack Web Developer</p>
             <div class="contact-info">
                 <a href="mailto:your.email@example.com">📧 your.email@example.com</a>
@@ -219,44 +220,52 @@
             </div>
         </header>
 
+        <!-- Professional Summary -->
         <section class="reveal">
-            <h2>🎯 الملخص المهني (Summary)</h2>
+            <h2>🎯 Summary</h2>
             <p style="color: var(--text-muted);">
-                مطور واجهات ومواقع ويب (Frontend Developer) خريج طموح، أمتلك شغفاً كبيراً ببناء واجهات مستخدم حديثة، سريعة وتفاعلية. لدي خلفية قوية في بناء تطبيقات الويب الكاملة والأنظمة البرمجية بالاعتماد على كود نظيف وتصميم متجاوب يضمن أفضل تجربة للمستخدم عبر المتصفحات ومختلف الشاشات.
+                Ambitious and passionate Frontend Developer and recent graduate, dedicated to building modern, fast, and highly interactive user interfaces. Possess a solid foundation in full-stack web development and software systems, focused on delivering clean code and responsive designs that ensure an optimal user experience across all devices and browsers.
             </p>
         </section>
 
+        <!-- Technical Skills -->
         <section class="reveal">
-            <h2>🛠️ المهارات التقنية (Technical Skills)</h2>
+            <h2>🛠️ Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skills-category">
-                    <strong>الواجهات (Frontend):</strong>
+                    <strong>Frontend:</strong>
                     <span>HTML5, CSS3, JavaScript (ES6+), React.js, Vue.js, Tailwind CSS</span>
                 </div>
                 <div class="skills-category">
-                    <strong>الخلفيات (Backend):</strong>
+                    <strong>Backend:</strong>
                     <span>Node.js, Express.js, Laravel (PHP)</span>
                 </div>
                 <div class="skills-category">
-                    <strong>قواعد البيانات:</strong>
+                    <strong>Databases:</strong>
                     <span>MySQL, MongoDB, SQL Server Express</span>
                 </div>
                 <div class="skills-category">
-                    <strong>أدوات أخرى:</strong>
-                    <span>Git, GitHub, SSMS, Blender (3D Modeling)</span>
+                    <strong>Tools & Others:</strong>
+                    <span>Git, GitHub, SSMS (SQL Server Management Studio), Blender (3D Modeling)</span>
                 </div>
             </div>
         </section>
 
+        <!-- Projects -->
         <section class="reveal">
-            <h2>🚀 المشاريع البرمجية (Featured Projects)</h2>
+            <h2>🚀 Featured Projects</h2>
             
+            <!-- Clinic Management Project -->
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title">نظام إدارة العيادات الطبية والوصفات الإلكترونية</span>
+                    <span class="card-title">Medical Clinic & E-Prescription Management System</span>
                     <span class="card-date">2026</span>
                 </div>
-                <p style="color: var(--text-muted);">نظام متكامل لإدارة العيادات وحجز المواعيد وتنظيم الوصفات الطبية إلكترونياً.</p>
+                <p style="color: var(--text-muted); margin-bottom: 10px;">An integrated web system designed to manage clinic operations, streamline appointment scheduling, and handle digital prescriptions efficiently.</p>
+                <ul>
+                    <li>Developed highly interactive and fully responsive user interfaces using React and Tailwind CSS.</li>
+                    <li>Built a robust backend control panel with a custom role permission system utilizing Laravel and MySQL.</li>
+                </ul>
                 <div class="card-tech">
                     <span class="tag">React.js</span>
                     <span class="tag">Tailwind CSS</span>
@@ -265,12 +274,17 @@
                 </div>
             </div>
 
+            <!-- MERN Stack Project -->
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title">منصة التفاعل الفوري بين الفنانين والمعجبين (MERN Stack)</span>
+                    <span class="card-title">Real-Time Artist-Fan Interaction Platform</span>
                     <span class="card-date">2026</span>
                 </div>
-                <p style="color: var(--text-muted);">تطبيق ويب يتيح للمشاهدين حجز العروض والتواصل المباشر عبر السوكيت فوراُ.</p>
+                <p style="color: var(--text-muted); margin-bottom: 10px;">A full-stack web application that bridges the gap between artists and fans, enabling show bookings and instant interactions.</p>
+                <ul>
+                    <li>Engineered a real-time messaging mechanism capable of supporting concurrent chat subscriptions using WebSockets (Socket.io).</li>
+                    <li>Implemented account management dashboards along with a simulated payment/booking system, managing data dynamically with MongoDB.</li>
+                </ul>
                 <div class="card-tech">
                     <span class="tag">React.js</span>
                     <span class="tag">Node.js</span>
@@ -281,20 +295,22 @@
             </div>
         </section>
 
+        <!-- Education -->
         <section class="reveal">
-            <h2>🎓 التعليم (Education)</h2>
+            <h2>🎓 Education</h2>
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title">بكالوريوس في هندسة البرمجيات / علوم الحاسوب</span>
-                    <span class="card-date">خريج حديث</span>
+                    <span class="card-title">Bachelor's Degree in Software Engineering / Computer Science</span>
+                    <span class="card-date">Recent Graduate</span>
                 </div>
+                <p style="color: var(--text-muted);">Academic focus on full-stack web development, software architecture, and database systems management.</p>
             </div>
         </section>
     </div>
 
-    <!-- ── 🧠 كود الـ JavaScript للشبكة المتفاعلة والظهور التدريجي ── -->
+    <!-- 🧠 JavaScript for Interactive Network & Scroll Reveal -->
     <script>
-        // 1. كود الأنيميشن الخاص بالظهور عند النزول (Scroll Reveal)
+        // 1. Scroll Reveal Logic
         document.addEventListener("DOMContentLoaded", function () {
             const sections = document.querySelectorAll(".reveal");
             const observer = new IntersectionObserver(entries => {
@@ -308,50 +324,46 @@
             sections.forEach(s => observer.observe(s));
         });
 
-        // 2. كود شبكة الخطوط والجزيئات المتفاعلة مع الماوس والشاشات (Responsive Canvas)
+        // 2. Interactive Responsive Canvas Logic
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
 
         let particlesArray = [];
-        const maxParticles = window.innerWidth < 600 ? 40 : 100; // تقليل عدد النقاط في الموبايل للحفاظ على سرعة الأداء
+        const maxParticles = window.innerWidth < 600 ? 40 : 100;
 
         const mouse = {
             x: null,
             y: null,
-            radius: window.innerWidth < 600 ? 100 : 180 // نصف قطر منطقة التأثر حول الماوس
+            radius: window.innerWidth < 600 ? 100 : 180
         };
 
-        // تتبع حركة الماوس على جهاز الكمبيوتر
         window.addEventListener('mousemove', function(event) {
             mouse.x = event.clientX;
             mouse.y = event.clientY;
         });
 
-        // مسح موقع الماوس عند خروجه من الشاشة
         window.addEventListener('mouseout', function() {
             mouse.x = null;
             mouse.y = null;
         });
 
-        // فئة بناء النقطة الواحدة (Particle Object)
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1; // حجم النقاط
-                this.speedX = Math.random() * 1.5 - 0.75; // سرعة الحركة الأفقية
-                this.speedY = Math.random() * 1.5 - 0.75; // سرعة الحركة العمودية
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1.5 - 0.75;
+                this.speedY = Math.random() * 1.5 - 0.75;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // الارتداد عند الاصطدام بحواف الشاشة
                 if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
                 if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
             }
             draw() {
-                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'; // لون النقطة أزرق خفيف
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -359,7 +371,6 @@
         }
 
         function init() {
-            // جعل حجم الـ Canvas مساوياً لحجم الشاشة بشكل ريسبونسيف تماماً
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particlesArray = [];
@@ -368,10 +379,8 @@
             }
         }
 
-        // دالة رسم الخطوط بين النقاط وبين الماوس
         function connect() {
             for (let a = 0; a < particlesArray.length; a++) {
-                // توصيل النقاط بالماوس
                 if (mouse.x !== null && mouse.y !== null) {
                     let dxMouse = particlesArray[a].x - mouse.x;
                     let dyMouse = particlesArray[a].y - mouse.y;
@@ -387,14 +396,13 @@
                     }
                 }
 
-                // توصيل النقاط ببعضها البعض لإنشاء الشبكة
                 for (let b = a; b < particlesArray.length; b++) {
                     let dx = particlesArray[a].x - particlesArray[b].x;
                     let dy = particlesArray[a].y - particlesArray[b].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 120) { // أقصى مسافة لظهور الخط بين نقطتين
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - (distance/120)})`; // يقل وضوح الخط كلما ابتعدت النقطتان
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - (distance/120)})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -405,7 +413,6 @@
             }
         }
 
-        // حلقة التحديث المستمر للأنيميشن لتشغيل الحركة بكفاءة 60 إطار في الثانية
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particlesArray.length; i++) {
@@ -416,7 +423,6 @@
             requestAnimationFrame(animate);
         }
 
-        // التعامل مع إعادة ضبط الحجم عند تدوير شاشة الموبايل أو تكبير متصفح الكمبيوتر
         window.addEventListener('resize', function() {
             init();
         });
