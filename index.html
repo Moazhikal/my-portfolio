@@ -6,13 +6,11 @@
     <title>معرض أعمالي | السيرة الذاتية التفاعلية</title>
     <style>
         :root {
-            --primary: #1e293b;
+            --primary: #0f172a;
             --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --bg-light: #f8fafc;
-            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border: rgba(226, 232, 240, 0.8);
         }
 
         * {
@@ -23,21 +21,38 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-light);
+            background-color: #f8fafc;
             color: var(--text-main);
             line-height: 1.6;
             padding: 40px 20px;
-            overflow-x: hidden; /* لمنع حدوث شريط تمرير أفقي أثناء الحركة */
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* ── 🕸️ كود خلفية شبكة الخطوط المتفاعلة ── */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* تجعل الشبكة خلف المحتوى دائماً */
+            background-color: #f8fafc;
+            pointer-events: none; /* تضمن أن الماوس يتفاعل مع الروابط بشكل طبيعي */
+        }
+
+        /* جعل الحاوية الرئيسية تبدو كتصميم زجاجي (Glassmorphism) لتندمج مع الخلفية */
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px); /* تأثير ضبابي شفاف على الخلفية */
+            -webkit-backdrop-filter: blur(8px);
             padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            position: relative;
         }
 
         /* Header Style */
@@ -61,16 +76,12 @@
             margin-bottom: 15px;
         }
 
-        .contact-info {
-            display: block;
-            margin-top: 15px;
-        }
-
         .contact-info a {
             color: var(--text-muted);
             text-decoration: none;
             margin: 0 10px;
             font-size: 0.95rem;
+            display: inline-block;
             transition: color 0.2s;
         }
 
@@ -78,19 +89,17 @@
             color: var(--accent);
         }
 
-        /* ── ✨ كود الترانزاكشن والحركة الجديد ✨ ── */
+        /* ── ✨ تأثير الظهور التدريجي للأقسام عند النزول ✨ ── */
         .reveal {
             opacity: 0;
-            transform: translateY(50px); /* يبدأ القسم نازلاً لأسفل بمقدار 50 بكسل */
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* حركة سلسة جداً واحترافية */
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* الفئة التي سيضيفها الجافاسكريبت تلقائياً عند النزول */
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        /* ─────────────────────────────────────── */
 
         section {
             margin-bottom: 45px;
@@ -104,12 +113,12 @@
             margin-bottom: 20px;
         }
 
-        /* Skills Layout */
+        /* المهارات والتصميم المتجاوب */
         .skills-category {
             margin-bottom: 15px;
             padding: 12px;
-            background: var(--bg-light);
-            border-radius: 8px;
+            background: rgba(248, 250, 252, 0.6);
+            border-radius: 12px;
             border: 1px solid var(--border);
         }
 
@@ -123,41 +132,44 @@
             color: var(--text-muted);
         }
 
-        /* Cards */
+        /* الكروت والمشاريع */
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.7);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 14px;
             padding: 20px;
             margin-bottom: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .card-header {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
+            flex-wrap: wrap; /* يجعلها متجاوبة على الشاشات الصغيرة */
+            gap: 10px;
         }
 
         .card-title {
             font-size: 1.2rem;
             color: var(--primary);
             font-weight: bold;
-            display: inline-block;
         }
 
         .card-date {
-            float: left;
             color: var(--text-muted);
             font-size: 0.9rem;
         }
 
         .card-tech {
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .tag {
@@ -165,7 +177,7 @@
             background: #eff6ff;
             color: var(--accent);
             padding: 4px 10px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 500;
             margin-left: 5px;
@@ -178,20 +190,25 @@
         }
 
         li {
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
+        /* 📱 شاشات الهواتف الذكية (Responsiveness) */
+        @media (max-width: 600px) {
+            body { padding: 15px 10px; }
+            .container { padding: 20px 15px; border-radius: 16px; }
+            header h1 { font-size: 1.7rem; }
+            .skills-category strong { display: block; margin-bottom: 5px; }
+            .card-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
+    <!-- لوحة الرسم التي ستتحرك عليها الشبكة الخلفية -->
+    <canvas id="canvas-bg"></canvas>
+
     <div class="container">
-        <!-- الرأس يظهر مباشرة بدون اختفاء لتوفير تجربة مستخدم سريعة -->
         <header>
             <h1>ضع اسمك هنا</h1>
             <p>Frontend Developer | Full-Stack Web Developer</p>
@@ -202,7 +219,6 @@
             </div>
         </header>
 
-        <!-- القسم الأول: الملخص المهني (أضفنا كلاس reveal) -->
         <section class="reveal">
             <h2>🎯 الملخص المهني (Summary)</h2>
             <p style="color: var(--text-muted);">
@@ -210,7 +226,6 @@
             </p>
         </section>
 
-        <!-- القسم الثاني: المهارات (أضفنا كلاس reveal) -->
         <section class="reveal">
             <h2>🛠️ المهارات التقنية (Technical Skills)</h2>
             <div class="skills-grid">
@@ -228,26 +243,20 @@
                 </div>
                 <div class="skills-category">
                     <strong>أدوات أخرى:</strong>
-                    <span>Git, GitHub, SSMS (SQL Server Management Studio)</span>
+                    <span>Git, GitHub, SSMS, Blender (3D Modeling)</span>
                 </div>
             </div>
         </section>
 
-        <!-- القسم الثالث: المشاريع (أضفنا كلاس reveal) -->
         <section class="reveal">
             <h2>🚀 المشاريع البرمجية (Featured Projects)</h2>
             
-            <!-- مشروع العيادات الطبية -->
-            <div class="card clearfix">
+            <div class="card">
                 <div class="card-header">
                     <span class="card-title">نظام إدارة العيادات الطبية والوصفات الإلكترونية</span>
                     <span class="card-date">2026</span>
                 </div>
-                <p style="color: var(--text-muted); margin-bottom: 10px;">نظام متكامل لإدارة العيادات الطبية وحجز المواعيد وتنظيم الوصفات الطبية إلكترونياً لضمان سير العمل بكفاءة عالية.</p>
-                <ul>
-                    <li>بناء واجهات تفاعلية بالكامل ومتجاوبة مع مختلف الشاشات باستخدام React و Tailwind CSS.</li>
-                    <li>تطوير لوحة تحكم خلفية قوية ونظام صلاحيات مخصص للأطباء والموظفين باستخدام Laravel و MySQL.</li>
-                </ul>
+                <p style="color: var(--text-muted);">نظام متكامل لإدارة العيادات وحجز المواعيد وتنظيم الوصفات الطبية إلكترونياً.</p>
                 <div class="card-tech">
                     <span class="tag">React.js</span>
                     <span class="tag">Tailwind CSS</span>
@@ -256,17 +265,12 @@
                 </div>
             </div>
 
-            <!-- مشروع MERN Stack -->
-            <div class="card clearfix">
+            <div class="card">
                 <div class="card-header">
                     <span class="card-title">منصة التفاعل الفوري بين الفنانين والمعجبين (MERN Stack)</span>
                     <span class="card-date">2026</span>
                 </div>
-                <p style="color: var(--text-muted); margin-bottom: 10px;">تطبيق ويب متكامل يتيح للمشاهدين حجز العروض والتواصل الحي والمباشر مع الفنانين بشكل فوري.</p>
-                <ul>
-                    <li>بناء آلية محادثة فورية (Real-time Messaging) تدعم تواصل مئات المشتركين في آن واحد باستخدام WebSockets (Socket.io).</li>
-                    <li>تطوير بيئة كاملة لإدارة الحسابات، مع نظام محاكاة الحجز والدفع الرقمي وحفظ البيانات في MongoDB.</li>
-                </ul>
+                <p style="color: var(--text-muted);">تطبيق ويب يتيح للمشاهدين حجز العروض والتواصل المباشر عبر السوكيت فوراُ.</p>
                 <div class="card-tech">
                     <span class="tag">React.js</span>
                     <span class="tag">Node.js</span>
@@ -277,44 +281,148 @@
             </div>
         </section>
 
-        <!-- القسم الرابع: التعليم (أضفنا كلاس reveal) -->
         <section class="reveal">
             <h2>🎓 التعليم (Education)</h2>
-            <div class="card clearfix">
+            <div class="card">
                 <div class="card-header">
                     <span class="card-title">بكالوريوس في هندسة البرمجيات / علوم الحاسوب</span>
                     <span class="card-date">خريج حديث</span>
                 </div>
-                <p style="color: var(--text-muted);">تركيز عميق على تطوير تطبيقات الويب وهندسة البرمجيات وإدارة قواعد البيانات.</p>
             </div>
         </section>
     </div>
 
-    <!-- ── 🧠 كود الـ JavaScript الذكي للحركة ── -->
+    <!-- ── 🧠 كود الـ JavaScript للشبكة المتفاعلة والظهور التدريجي ── -->
     <script>
+        // 1. كود الأنيميشن الخاص بالظهور عند النزول (Scroll Reveal)
         document.addEventListener("DOMContentLoaded", function () {
             const sections = document.querySelectorAll(".reveal");
-
-            const options = {
-                root: null, // يعتمد على نافذة المتصفح الحالية
-                threshold: 0.15, // يظهر القسم عندما يدخل منه 15% إلى الشاشة
-                rootMargin: "0px 0px -50px 0px" // تشغيل الحركة قبل ظهور القسم بقليل ليعطي انطباعاً استباقياً
-            };
-
-            const observer = new IntersectionObserver(function (entries, observer) {
+            const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("active");
-                        // بمجرد أن يظهر القسم، نتوقف عن مراقبته ليبقى ظاهراً ولا يختفي مرة أخرى عند الصعود
-                        observer.unobserve(entry.target); 
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, options);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+            }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+            sections.forEach(s => observer.observe(s));
         });
+
+        // 2. كود شبكة الخطوط والجزيئات المتفاعلة مع الماوس والشاشات (Responsive Canvas)
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const maxParticles = window.innerWidth < 600 ? 40 : 100; // تقليل عدد النقاط في الموبايل للحفاظ على سرعة الأداء
+
+        const mouse = {
+            x: null,
+            y: null,
+            radius: window.innerWidth < 600 ? 100 : 180 // نصف قطر منطقة التأثر حول الماوس
+        };
+
+        // تتبع حركة الماوس على جهاز الكمبيوتر
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+
+        // مسح موقع الماوس عند خروجه من الشاشة
+        window.addEventListener('mouseout', function() {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // فئة بناء النقطة الواحدة (Particle Object)
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1; // حجم النقاط
+                this.speedX = Math.random() * 1.5 - 0.75; // سرعة الحركة الأفقية
+                this.speedY = Math.random() * 1.5 - 0.75; // سرعة الحركة العمودية
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // الارتداد عند الاصطدام بحواف الشاشة
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'; // لون النقطة أزرق خفيف
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            // جعل حجم الـ Canvas مساوياً لحجم الشاشة بشكل ريسبونسيف تماماً
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray = [];
+            for (let i = 0; i < maxParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        // دالة رسم الخطوط بين النقاط وبين الماوس
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                // توصيل النقاط بالماوس
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dxMouse = particlesArray[a].x - mouse.x;
+                    let dyMouse = particlesArray[a].y - mouse.y;
+                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    
+                    if (distMouse < mouse.radius) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - (distMouse/mouse.radius)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+
+                // توصيل النقاط ببعضها البعض لإنشاء الشبكة
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) { // أقصى مسافة لظهور الخط بين نقطتين
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${1 - (distance/120)})`; // يقل وضوح الخط كلما ابتعدت النقطتان
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // حلقة التحديث المستمر للأنيميشن لتشغيل الحركة بكفاءة 60 إطار في الثانية
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connect();
+            requestAnimationFrame(animate);
+        }
+
+        // التعامل مع إعادة ضبط الحجم عند تدوير شاشة الموبايل أو تكبير متصفح الكمبيوتر
+        window.addEventListener('resize', function() {
+            init();
+        });
+
+        init();
+        animate();
     </script>
 </body>
 </html>
